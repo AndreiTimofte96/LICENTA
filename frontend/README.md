@@ -1,4 +1,4 @@
-## IZIWORK REACT APP
+# LICENTA REACT APP
 
 ## Quick start
 
