@@ -1,0 +1,12 @@
+# Don't check auto-generated stuff into git
+coverage
+build
+node_modules
+package-lock.json
+
+# Cruft
+npm-debug.log
+
+# Logs
+yarn-error.log
+yarn.lock

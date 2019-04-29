@@ -1,0 +1,38 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["airbnb", "plugin:react/recommended"],
+    "env": {
+      "browser": true,
+      "node": true,
+      "jest": true,
+      "es6": true
+    },
+    "plugins": [
+      "react",
+      "jsx-a11y"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "react/jsx-filename-extension": 0,
+      "camelcase": 0,
+      "react/prop-types": 0,
+      "no-underscore-dangle": 0,
+      "react/no-did-update-set-state": 0,
+      "arrow-parens": 0,
+      "import/prefer-default-export": 0,
+      "import/no-extraneous-dependencies": 0
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "./config/webpack.prod.babel.js"
+        }
+      }
+    }
+  }

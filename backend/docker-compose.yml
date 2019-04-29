@@ -1,0 +1,37 @@
+# create a docker-compose.yml file
+version: "2"
+services:
+  web:
+    build: .
+    ports:
+      - "2222:4000"
+    volumes:
+      - ./:/application
+      - /application/node_modules
+    links:
+      - db:db
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=extension
+      - DB_USER=timi
+      - DB_PASSWORD=96timi19
+  db:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=extension
+      - MYSQL_USER=timi
+      - MYSQL_PASSWORD=96timi19
+      - MYSQL_ROOT_PASSWORD=YHQtLt2fdCCk
+    volumes:
+      - ./data1:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: YHQtLt2fdCCk
+    ports:
+      - "8080:80"
