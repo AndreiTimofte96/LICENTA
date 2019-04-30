@@ -13,7 +13,10 @@ export default class UnauthHeader extends React.Component {
     return (
       <div className="unauth-header-container">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="navbar-brand">Logo</div>
+          <div className="navbar-brand">
+            <i className="fas fa-clock mr-2 mt-1" />
+            Nurses Timetable Maker
+          </div>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>

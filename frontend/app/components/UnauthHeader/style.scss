@@ -1,4 +1,8 @@
 .unauth-header-container{
   height: 60px;
-  border-bottom: 3px solid rgb(206, 206, 206);
+  border-bottom: 3px solid #E7DFDF;
+
+  .navbar-brand i{
+    color: red;
+  }
 }
