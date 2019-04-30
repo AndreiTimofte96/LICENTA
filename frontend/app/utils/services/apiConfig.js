@@ -1,6 +1,6 @@
 const apiRoutes = {
   API_URL: 'http://0.0.0.0:2222',
-  INTRO: '/intro',
+  LOGIN: '/authenticate',
 };
 
 const apiHeaders = (token) => {

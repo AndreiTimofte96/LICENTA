@@ -1,24 +1,35 @@
-import { GET_HOMEPAGE_SUCCESS, GET_HOMEPAGE_PENDING } from './constants';
-import { homepageService_get } from '../../utils/services/services';
+import { POST_LOGIN_PENDING, POST_LOGIN_SUCCESS, POST_LOGIN_ERROR } from './constants';
+import { loginService_post } from './services';
 
-export function homepageGet() {
+export function loginPost(mail, password, history) {
   return (dispatch) => {
-    dispatch({
-      type: GET_HOMEPAGE_PENDING,
-      isPending: true,
-    });
-    homepageService_get().then((response) => {
-      dispatch({
-        type: GET_HOMEPAGE_PENDING,
-        isPending: false,
-      });
-      dispatch({
-        type: GET_HOMEPAGE_SUCCESS,
-        isSuccess: true,
-        message: response.data.message,
-      });
+    dispatch(postLoginPending(true));
+    loginService_post({ mail, password }).then((response) => {
+      dispatch(postLoginPending(false));
+      dispatch(postLoginSuccess(response));
+      const { token } = response.data;
+      localStorage.setItem('ntm-token', token);
+      history.push('/homepage');
     }).catch((error) => {
-      console.log('!!!!!!', error); //eslint-disable-line
+      console.log('!!!!!!', error.response.data); //eslint-disable-line
+      dispatch(postLoginError(error.response.data));
     });
   };
 }
+
+const postLoginPending = (status) => ({
+  type: POST_LOGIN_PENDING,
+  isPending: status,
+});
+
+const postLoginSuccess = () => ({
+  type: POST_LOGIN_SUCCESS,
+  isSuccess: true,
+});
+
+const postLoginError = (error) => ({
+  type: POST_LOGIN_ERROR,
+  isError: true,
+  errorMessage: error.message,
+});
+

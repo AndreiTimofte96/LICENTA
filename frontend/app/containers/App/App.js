@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
 
-import Login from '../Login/Login';
+import Login from '../Login/Loadable';
 import Blog from '../Blog/Blog';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import '../../styles/global-styles.scss';

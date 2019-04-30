@@ -2,7 +2,29 @@
   height: 60px;
   border-bottom: 3px solid #E7DFDF;
 
-  .navbar-brand i{
-    color: red;
+  nav{
+    z-index: 100;
+  
+    .navbar-brand i{
+      color: red;
+    }
+
+    .navbar-toggler{
+      border: none;
+      outline-color: transparent;
+    }
+    .navbar-collapse{
+      background-color: #FFFFFF;
+      margin: 12px -16px 0px;
+      border-bottom: 3px solid #E7DFDF;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .unauth-header-container{
+    .navbar-brand{
+      font-size: 18px;
+    }
   }
 }
