@@ -41,9 +41,10 @@ module.exports = (() => {
           token
         });
       } else {
-        res.json({ success: false, message: 'Autentificare esuata. Utilizator/parola invalida' });
+        res.send(401, 'Autentificare esuata. Email/parola invalida');
       }
     }).catch((e) => {
+      res.status(401);
       console.log(e); //eslint-disable-line
     });
   };
@@ -51,10 +52,10 @@ module.exports = (() => {
 
   const register = (req, res) => {
     const { body } = req;
-    const { mail, password, userName } = body;
+    const { mail, password, username } = body;
 
     newUser({
-      userName,
+      username,
       mail,
       password
     }).then((user) => {

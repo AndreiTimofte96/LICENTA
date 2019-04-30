@@ -2,14 +2,14 @@ module.exports = (() => {
   const User = require('../models/user_model');
 
   const newUser = ({
-    userName,
+    username,
     mail,
     password
   }) => new User()
     .insert()
     .set('password', password)
     .set('mail', mail)
-    .set('userName', userName)
+    .set('username', username)
     .valueOf()
     .then(() => true);
 
