@@ -1,16 +1,22 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import Login from '../Login/Login';
+import Blog from '../Blog/Blog';
+import NotFoundPage from '../NotFoundPage/Loadable';
+import '../../styles/global-styles.scss';
 import './style.scss';
 
 const App = () => (
   <div className="app-wrapper">
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="" component={NotFoundPage} />
-    </Switch>
+    <HashRouter>
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/blog" component={Blog} />
+        <Redirect path="/" to="/login" />
+        <Route path="" component={NotFoundPage} />
+      </Switch>
+    </HashRouter>
   </div>
 );
 

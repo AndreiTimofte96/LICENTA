@@ -1,0 +1,25 @@
+
+.login-container{
+
+  .wrapper{
+    height: calc(100vh - 60px);
+    .login-form{
+      background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(255,0,0,1));
+      color: #FFFFFF;
+      clip-path: ellipse(61% 65% at 39% 47%);
+    }
+    .picture{
+      // background-image: linear-gradient(to top, rgb(255, 140, 132), rgb(240, 240, 240));
+      background-image: url(../../images//login.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      .text{
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        max-width: 50vh;
+      }
+    }
+  }
+}
