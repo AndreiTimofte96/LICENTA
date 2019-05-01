@@ -9,10 +9,9 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const { authenticate, register, checkAuthenticated } = require('./app/routes/authenticate_routes');
+const { authenticate, checkAuthenticated } = require('./app/routes/authenticate_routes');
 
 app.use(cors());
-
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
@@ -21,15 +20,8 @@ app.get('/', (req, res) => {
   res.send('Hello! The API is at http://localhost/api');
 });
 
-app.get('/intro', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Aici (va) zace licenta mea!'
-  });
-});
-
 app.post('/authenticate', authenticate);
-app.post('/register', register);
+// app.post('/register', register);
 
 
 const apiRoutes = express.Router();

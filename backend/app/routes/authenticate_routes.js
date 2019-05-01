@@ -1,8 +1,8 @@
 module.exports = (() => {
   const jwt = require('jsonwebtoken');
   const { secret, expiryTime } = require('../../config/config');
-  const { getUser, newUser } = require('../actions/user_actions');
-
+  const { getUser } = require('../actions/user_actions');
+  const { checkReqBodyFields } = require('../utils/utils');
 
   const checkAuthenticated = (req, res, next) => {
     const token = req.body.token || req.param('token') || req.headers['x-access-token'];
@@ -11,7 +11,10 @@ module.exports = (() => {
       jwt.verify(token, secret, (err, decoded) => {
         console.log('decoded', decoded); //eslint-disable-line
         if (err) {
-          return res.json({ success: false, message: 'Token invalid' });
+          return res.status(403).send({
+            success: false,
+            message: 'Token invalid'
+          });
         }
         req.decoded = decoded;
         next();
@@ -28,6 +31,12 @@ module.exports = (() => {
     const { body } = req;
     const { mail, password } = body;
 
+    checkReqBodyFields({ mail, password }).then((response) => {
+      if (response.status === false) {
+        return res.status(400).send(response.res);
+      }
+    });
+
     getUser({ mail, password }).then((user) => {
       console.log(user); //eslint-disable-line
       if (user) {
@@ -35,43 +44,21 @@ module.exports = (() => {
           expiresIn: expiryTime
         });
 
-        res.json({
+        return res.json({
           success: true,
           message: 'Token provided!',
           token
         });
-      } else {
-        res.send(401, 'Autentificare esuata. Email/parola invalida');
       }
+      return res.send(401, 'Autentificare esuata. Email/parola invalida');
     }).catch((e) => {
       res.status(401);
       console.log(e); //eslint-disable-line
     });
   };
 
-
-  const register = (req, res) => {
-    const { body } = req;
-    const { mail, password, username } = body;
-
-    newUser({
-      username,
-      mail,
-      password
-    }).then((user) => {
-      console.log('THIS IS USER:', user); //eslint-disable-line
-      res.json({
-        success: true, message: 'Utilizator creat cu succes!'
-      });
-    }).catch((e) => {
-      console.log(e); //eslint-disable-line
-      res.json({ success: false, message: 'Mailul exista deja!' });
-    });
-  };
-
   return {
     authenticate,
-    register,
     checkAuthenticated
   };
 })();
