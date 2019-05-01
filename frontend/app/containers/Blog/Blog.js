@@ -3,7 +3,7 @@ import React from 'react';
 import UnauthHeader from '../../components/UnauthHeader/UnauthHeader';
 import './style.scss';
 
-export default class HomePage extends React.Component {
+export default class Homepage extends React.Component {
   constructor() {
     super();
     this.state = {

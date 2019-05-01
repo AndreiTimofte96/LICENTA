@@ -88,7 +88,7 @@ module.exports = (() => {
         res.status(401);
         console.log(e); //eslint-disable-line
       });
-  }
+  };
 
   return {
     authenticate,

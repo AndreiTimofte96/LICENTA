@@ -1,6 +1,7 @@
 const apiRoutes = {
   API_URL: 'http://0.0.0.0:2222',
   LOGIN: '/authenticate',
+  USER_ME: '/api/userMe',
 };
 
 const apiHeaders = (token) => {
@@ -9,7 +10,7 @@ const apiHeaders = (token) => {
   };
 
   if (token && token.length > 0) {
-    headers['X-Access-Token'] = token;
+    headers['x-access-token'] = token;
   }
   return headers;
 };
