@@ -9,7 +9,10 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const { authenticate, checkAuthenticated } = require('./app/routes/authenticate_routes');
+const {
+  authenticate, checkAuthenticated,
+  userMe, resetPassword,
+} = require('./app/routes/authenticate_routes');
 
 app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,9 +36,12 @@ apiRoutes.get('/', (req, res) => {
   res.json({ success: true, message: 'This is my API!' });
 });
 
-// apiRoutes.get('/books', allBooks);
+apiRoutes.get('/userMe', userMe);
+apiRoutes.post('/resetPassword', resetPassword);
 
 
 app.listen(PORT, () => {
   debug(`listening at port ${chalk.green(PORT)}`);
 });
+
+// ALTER TABLE `itemcategory` ADD `aaa` ENUM('false', 'true') NOT NULL DEFAULT 'false'

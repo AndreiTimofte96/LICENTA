@@ -8,7 +8,10 @@ module.exports = (() => {
   }) => {
     if (id) {
       return new User()
-        .field('*')
+        .field('mail')
+        .field('username')
+        .field('password_changed')
+        .field('admin')
         .where({
           id
         })
@@ -28,7 +31,30 @@ module.exports = (() => {
       });
   };
 
+  const changeUserPassword = ({ mail, password, new_password }) => {
+    if (mail && password && new_password) {
+      return new User()
+        .field('*')
+        .where({
+          mail, password
+        }).valueOf()
+        .then((res) => {
+          if (res.length === 1) {
+            return new User()
+              .update()
+              .set('password', new_password)
+              .where({ mail, password })
+              .valueOf()
+              .then(() => true);
+          }
+          return false;
+        });
+    }
+  };
+
   return {
-    getUser
+    getUser,
+    changeUserPassword,
+
   };
 })();

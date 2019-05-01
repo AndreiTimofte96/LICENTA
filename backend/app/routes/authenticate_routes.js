@@ -1,7 +1,7 @@
 module.exports = (() => {
   const jwt = require('jsonwebtoken');
   const { secret, expiryTime } = require('../../config/config');
-  const { getUser } = require('../actions/user_actions');
+  const { getUser, changeUserPassword } = require('../actions/user_actions');
   const { checkReqBodyFields } = require('../utils/utils');
 
   const checkAuthenticated = (req, res, next) => {
@@ -57,8 +57,43 @@ module.exports = (() => {
     });
   };
 
+  const userMe = (req, res) => {
+    const { id } = req.decoded.user;
+    getUser({ id })
+      .then((user) => res.json({ success: true, user, }))
+      .catch((e) => {
+        res.status(401);
+        console.log(e); //eslint-disable-line
+      });
+  };
+
+  const resetPassword = (req, res) => {
+    const { mail } = req.decoded.user;
+    const { password, new_password } = req.body;
+
+    checkReqBodyFields({ password, new_password }).then((response) => {
+      if (response.status === false) {
+        return res.status(400).send(response.res);
+      }
+    });
+
+    changeUserPassword({ mail, password, new_password })
+      .then((response) => {
+        if (response === true) {
+          return res.json({ success: true, message: 'Parola schimbata cu succes!' });
+        }
+        return res.send(401, 'Parola veche invalida. Incearca din nou!');
+      })
+      .catch((e) => {
+        res.status(401);
+        console.log(e); //eslint-disable-line
+      });
+  }
+
   return {
     authenticate,
-    checkAuthenticated
+    checkAuthenticated,
+    userMe,
+    resetPassword,
   };
 })();
