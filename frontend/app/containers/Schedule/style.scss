@@ -1,0 +1,22 @@
+.schedule-container{
+  table{
+    border: 1px solid #000000 !important;
+  }
+  .current-user{
+    background-color: #D3EBFD;
+  }
+  .current-day{
+    background-color: #F9CFD5;
+    color: #E54A53 !important;
+  }
+  .picture{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: lightgray;
+  }
+}
+table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
+  border:1px solid #000000;
+}

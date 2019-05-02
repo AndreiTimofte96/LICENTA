@@ -8,6 +8,7 @@ module.exports = (() => {
   }) => {
     if (id) {
       return new User()
+        .field('id')
         .field('mail')
         .field('username')
         .field('password_changed')

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
+import Header from '../Header/Loadable';
 // import LoadingIndicator from '../../components/LoadingIndicator';
 import './style.scss';
 

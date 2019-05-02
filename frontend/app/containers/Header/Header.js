@@ -7,7 +7,14 @@ export default class Header extends React.Component {
     super();
     this.state = {};
   }
+
+  signOut = () => {
+    localStorage.removeItem('ntm-token');
+    window.location.replace('/');
+  }
+
   render() {
+    const { username } = this.props;
     return (
       <div className="header-container">
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -55,9 +62,14 @@ export default class Header extends React.Component {
             </ul>
             <div className="mx-2 username d-inline-flex">
               <div className="picture" />
-              <NavLink to="/my-profile" className="nav-link">
-                <b>Olga</b>
+              <NavLink to="/my-profile" className="p-2">
+                <b>{username}</b>
               </NavLink>
+            </div>
+            <div className="nav-item logout">
+              <div className="p-2" onClick={this.signOut}>
+                Logout
+              </div>
             </div>
 
           </div>

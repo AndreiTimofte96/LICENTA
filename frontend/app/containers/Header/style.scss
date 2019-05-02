@@ -1,6 +1,7 @@
 .header-container{
   height: 60px;
   border-bottom: 3px solid #E7DFDF;
+  background-color: #FFFFFF;
 
   nav{
     z-index: 100;
@@ -28,7 +29,13 @@
         border-radius: 50%;
         overflow: hidden;
         background-color: lightgray;
-        
+      }
+    }
+
+    .logout{
+      cursor: pointer;
+      &:hover{
+        text-decoration: underline;
       }
     }
   }
