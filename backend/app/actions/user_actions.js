@@ -43,6 +43,7 @@ module.exports = (() => {
             return new User()
               .update()
               .set('password', new_password)
+              .set('password_changed', 'true')
               .where({ mail, password })
               .valueOf()
               .then(() => true);

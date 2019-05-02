@@ -1,4 +1,4 @@
-.unauth-header-container{
+.header-container{
   height: 60px;
   border-bottom: 3px solid #E7DFDF;
 
@@ -13,11 +13,29 @@
       border: none;
       outline-color: transparent;
     }
+
+    .username{
+      &:hover{
+        text-decoration: underline;
+      }
+
+      a{
+        color: #000000 !important;
+      }
+      .picture{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        
+      }
+    }
   }
 }
 
 @media (max-width: 768px) {
-  .unauth-header-container{
+  .header-container{
     .navbar-collapse{
       background-color: #FFFFFF;
       margin: 7px -18px 0px -18px;
@@ -29,7 +47,7 @@
 
 
 @media (max-width: 320px) {
-  .unauth-header-container{
+  .header-container{
     .navbar-brand{
       font-size: 17px;
     }

@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 // import LoadingIndicator from '../../components/LoadingIndicator';
 import './style.scss';
 
-export default class HomePage extends React.Component {
+export default class MyTimetable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,8 +13,8 @@ export default class HomePage extends React.Component {
     return (
       <div>
         <Header />
-        <div className="homepage-container">
-          Here will be the homepage.
+        <div className="timetable-container">
+          Here will be the timetable
         </div>
       </div>
     );
