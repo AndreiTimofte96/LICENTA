@@ -1,4 +1,4 @@
-.schedule-container{
+.timetable-container{
   table{
     border: 1px solid #000000 !important;
   }
@@ -15,6 +15,10 @@
     border-radius: 50%;
     overflow: hidden;
     background-color: lightgray;
+  }
+
+  .other-tt-dates{
+    
   }
 }
 table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{

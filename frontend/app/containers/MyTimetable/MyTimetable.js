@@ -1,20 +1,55 @@
 import React from 'react';
 import Header from '../Header/Loadable';
 // import LoadingIndicator from '../../components/LoadingIndicator';
-import Schedule from '../Schedule';
+import Timetable from '../Timetable';
+import CommentsSection from '../../components/CommentsSection';
 import './style.scss';
 
 export default class MyTimetable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      month: 'februarie 2019',
-      norm: '160 H',
-      tableHeader: this.getDayNames(2019, 5),
-      tableData: this.getTableData(),
-      username: 'Olga',
+      serverData: {
+        otherTTDates: [{
+          month: '2',
+          year: '2019',
+        }, {
+          month: '3',
+          year: '2019',
+        }, {
+          month: '4',
+          year: '2019',
+        }, {
+          month: '5',
+          year: '2019',
+        }],
+        currentTTDate: {
+          month: '5',
+          year: '2019',
+        },
+        norm: '160 H',
+        tableHeader: this.getDayNames(2019, 5),
+        tableData: this.getTableData(),
+        username: 'Olga',
+        comments: [
+          {
+            username: 'Timi',
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it ",
+          },
+          {
+            username: 'Olga',
+            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it ",
+          },
+        ],
+      },
     };
   }
+
+  componentWillMount() {
+    // const { month, year } = this.props.match.params;
+    // call la server cu datele
+  }
+
   getDayNames = (year, month) => {
     const days = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
     const daysInMonth = new Date(year, month, 0).getDate();
@@ -47,26 +82,27 @@ export default class MyTimetable extends React.Component {
     return dataArr;
   }
 
-
   render() {
     const {
-      month, tableHeader,
+      currentTTDate, tableHeader,
       tableData, norm, username,
-    } = this.state;
+      comments, otherTTDates,
+    } = this.state.serverData;
     return (
       <div>
         <Header />
         <div className="px-5 timetable-container">
-          <Schedule
-            month={month}
-            norm={norm}
+          <Timetable
+            data={{
+              username,
+              norm,
+            }}
             tableHeader={tableHeader}
             tableData={tableData}
-            username={username}
+            otherTTDates={otherTTDates}
+            currentTTDate={currentTTDate}
           />
-          <div className="comments-zone mt-5">
-            <h2>Zona de comentarii: </h2>
-          </div>
+          <CommentsSection comments={comments} />
         </div>
       </div>
     );

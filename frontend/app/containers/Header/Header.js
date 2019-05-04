@@ -8,6 +8,13 @@ export default class Header extends React.Component {
     this.state = {};
   }
 
+  getCurrentTextMonth = () => {
+    const date = new Date();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `/${month}/${year}`;
+  }
+
   signOut = () => {
     localStorage.removeItem('ntm-token');
     window.location.replace('/');
@@ -35,7 +42,7 @@ export default class Header extends React.Component {
                 </NavLink>
               </li>
               <li className="nav-item mx-2">
-                <NavLink to="/my-timetable" className="nav-link">
+                <NavLink to={`/my-timetable${this.getCurrentTextMonth()}`} className="nav-link">
                   <i className="fas fa-table mr-2" />
                   Orarul meu
                 </NavLink>
@@ -71,7 +78,6 @@ export default class Header extends React.Component {
                 Logout
               </div>
             </div>
-
           </div>
         </nav>
       </div>
