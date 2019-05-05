@@ -23,6 +23,13 @@ app.get('/', (req, res) => {
   res.send('Hello! The API is at http://localhost/api');
 });
 
+app.get('/cpp', (req, res) => {
+  // const addon = require('./app/utils/cpp/build/Release/addon');
+  // console.log(addon.algorithm);
+  const cppOutput = { aa: '123' };
+  res.send(cppOutput);
+});
+
 app.post('/authenticate', authenticate);
 // app.post('/register', register);
 
