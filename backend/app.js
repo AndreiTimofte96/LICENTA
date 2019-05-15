@@ -14,6 +14,11 @@ const {
   userMe, resetPassword,
 } = require('./app/routes/authenticate_routes');
 
+const {
+  postUserPref,
+  getUserPref
+} = require('./app/routes/preferences_routes');
+
 app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -26,7 +31,6 @@ app.get('/', (req, res) => {
 app.post('/authenticate', authenticate);
 // app.post('/register', register);
 
-
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
@@ -38,6 +42,11 @@ apiRoutes.get('/', (req, res) => {
 
 apiRoutes.get('/userMe', userMe);
 apiRoutes.post('/resetPassword', resetPassword);
+
+// preferences
+apiRoutes.get('/userPreferences', getUserPref);
+apiRoutes.post('/userPreferences', postUserPref);
+// preferences
 
 
 app.listen(PORT, () => {
