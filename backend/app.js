@@ -24,7 +24,7 @@ const {
   getTimetable
 } = require('./app/routes/timetable_routes');
 
-// const { timetableAlgorithm } = require('./app/utils/timetableAlgorithm/main');
+const { timetableAlgorithm } = require('./app/utils/timetableAlgorithm/main');
 
 // timetableSchedule.scheduleJob('5 * * * * *', () => {
 //   console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTT');
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 app.use(morgan('tiny'));
 
 app.get('/', (req, res) => {
-  // timetableAlgorithm('5', '2019');
+  timetableAlgorithm('5', '2019');
   res.send('Hello! The API is at http://localhost/api');
 });
 

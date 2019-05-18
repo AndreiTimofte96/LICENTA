@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectValue = (state) => state.mytimetable;
+const selectValue = (state) => state.myTimetable;
 
 const makeIsPending = () => createSelector(
   selectValue,
@@ -13,9 +13,9 @@ const makeIsSuccess = () => createSelector(
 );
 
 
-const makeMessage = () => createSelector(
+const makeTimetable = () => createSelector(
   selectValue,
-  (currentState) => currentState.message,
+  (currentState) => currentState.timetableData,
 );
 
 
@@ -23,5 +23,5 @@ export {
   selectValue,
   makeIsPending,
   makeIsSuccess,
-  makeMessage,
+  makeTimetable,
 };

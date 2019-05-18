@@ -28,7 +28,7 @@ export default class Timetable extends React.Component {
           <h2 className="text-center text-uppercase">
             Grafic de lucru attip luna {this.getTextMonth(currentTTDate)}
           </h2>
-          <h2 className="text-uppercase mt-3">Norma {data.norm}</h2>
+          <h2 className="text-uppercase mt-3">Norma {data.monthNorm}</h2>
           <div className="table-responsive">
             <table className="table table-sm table-bordered">
               <colgroup>
@@ -57,8 +57,9 @@ export default class Timetable extends React.Component {
                       key={Math.random(1, 10000000)}
                     >
                       <td className="">
-                        <div className="d-flex">
+                        <div className="d-flex justify-content-between">
                           <div className=""> {obj.username} </div>
+                          <div className="align-self-end user-norm">{obj.norm}</div>
                         </div>
                       </td>
                       {obj.data.map((hours) =>

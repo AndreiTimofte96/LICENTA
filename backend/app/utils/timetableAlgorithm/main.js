@@ -75,10 +75,10 @@ module.exports = (() => {
     const tableData = [];
     for (let userIndex = 0; userIndex < numberOfUsers; userIndex += 1) {
       const userId = usersPreferences[userIndex].user_id;
-      resultMatrix[userIndex][0] = null;
       tableData.push({
         userId,
-        data: resultMatrix[userIndex]
+        data: resultMatrix[userIndex].slice(1),
+        norm: userStatus[userId].norm
       });
     }
     // prepare response for resolve
@@ -89,7 +89,6 @@ module.exports = (() => {
       tableHeader: getDayNames(month, year),
       tableData
     };
-
     resolve(response);
   });
 

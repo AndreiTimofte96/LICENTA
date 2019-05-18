@@ -13,22 +13,21 @@ module.exports = (() => {
     })
     .valueOf()
     .then((res) => {
-      let _res = res[0];
-      _res.table_header = JSON.parse(_res.table_header);
-      _res.table_data = JSON.parse(_res.table_data);
-      _res = {
-        ..._res,
+      const _res = {
+        currentTTDate: { month: res[0].month, year: res[0].year },
+        monthNorm: res[0].month_norm,
         otherTTDates: [],
+        tableHeader: JSON.parse(res[0].table_header),
+        tableData: JSON.parse(res[0].table_data),
       };
 
       return getUsersListAction().then((usersList) => {
         const findUser = (userId) => usersList.find((user) => user.id === userId);
-        for (let tableIndex = 0; tableIndex < _res.table_data.length; tableIndex += 1) {
-          const tableRow = _res.table_data[tableIndex];
+        for (let tableIndex = 0; tableIndex < _res.tableData.length; tableIndex += 1) {
+          const tableRow = _res.tableData[tableIndex];
           const userData = findUser(tableRow.userId);
-          _res.table_data[tableIndex].username = userData.username;
+          _res.tableData[tableIndex].username = userData.username;
         }
-        
         return _res;
       });
     });

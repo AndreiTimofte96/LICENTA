@@ -5,8 +5,8 @@ module.exports = (() => {
     N: { label: 'N', value: 12 },
     T: { label: '12', value: 12 },
     E: { label: '8', value: 8 },
-    GZI: { label: 'G zi', value: 0 },
-    GN: { label: 'G n', value: 12 }
+    GZI: { label: 'Gzi', value: 0 },
+    GN: { label: 'Gn', value: 12 }
   };
 
   const TTRULES = {

@@ -6,7 +6,7 @@ const loginService_post = (body) => {
   return axios.post(
     apiRoutes.API_URL + apiRoutes.LOGIN,
     body,
-    { header: apiHeaders() },
+    { headers: apiHeaders() },
   );
 };
 

@@ -2,6 +2,7 @@ const apiRoutes = {
   API_URL: 'http://0.0.0.0:2222',
   LOGIN: '/authenticate',
   USER_ME: '/api/userMe',
+  GET_TIMETABLE: '/api/getTimetable',
 };
 
 const apiHeaders = (token) => {
