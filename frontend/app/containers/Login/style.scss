@@ -4,9 +4,12 @@
   .wrapper{
     height: calc(100vh - 60px);
     .login-form{
-      background-image: linear-gradient(to top, rgba(241, 28, 10, 0.22), rgba(241, 28, 10 ,1));
-      color: #FFFFFF;
-      clip-path: ellipse(61% 65% at 39% 47%);
+      background-image: linear-gradient(to bottom, white, #fef9f6);
+      // background-color:#F8F8F8;
+      // clip-path: ellipse(62% 93% at 39% 47%);
+      form{
+        width: 60%;
+      }
     }
     .picture{
       // background-image: linear-gradient(to top, rgb(255, 140, 132), rgb(240, 240, 240));

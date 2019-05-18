@@ -16,32 +16,26 @@ module.exports = (() => {
   const postUserPref = (req, res) => {
     const { id } = req.decoded.user;
     const {
-      nights_per_week, free_weekends, night_shifts,
-      special_events, timetable_configurator
+      special_events,
+      weekend_days
     } = req.body;
 
     checkReqBodyFields({
-      nights_per_week,
-      free_weekends,
-      night_shifts,
       special_events,
-      timetable_configurator
+      weekend_days
     }).then((response) => {
       if (response.status === false) {
         return res.status(400).send(response.res);
       }
       postUserPrefAction({
         id,
-        nights_per_week,
-        free_weekends,
-        night_shifts,
         special_events,
-        timetable_configurator
+        weekend_days
       }).then((response1) => {
         if (response1 === true) {
           return res.json({ success: true, message: 'Preferinte adaugate cu succes' });
         }
-        return res.send(401, 'Eroare! Preferinta deja adaugata!');
+        return res.send(401, 'Eroare! Preferinta deja adaugata pentru aceasta luna!');
       });
     }).catch((e) => {
       res.status(401);

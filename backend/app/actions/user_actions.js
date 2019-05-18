@@ -54,9 +54,16 @@ module.exports = (() => {
     }
   };
 
+  const getUsersListAction = () => new User()
+    .field('id')
+    .field('username')
+    .valueOf()
+    .then((res) => res);
+
   return {
     getUser,
     changeUserPassword,
+    getUsersListAction
 
   };
 })();

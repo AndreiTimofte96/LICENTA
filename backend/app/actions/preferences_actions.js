@@ -13,30 +13,42 @@ module.exports = (() => {
       const userPref = {
         ...res[0],
         special_events: JSON.parse(res[0].special_events),
-        timetable_configurator: JSON.parse(res[0].timetable_configurator)
       };
       return userPref;
     })
   );
 
+  const getAllUsersPrefAction = ({
+    month,
+    year
+  }) => (new Preferences()
+    .field('*')
+    .where({
+      month,
+      year
+    })
+    .valueOf()
+    .then((res) => {
+      Object.keys(res).map((key) => {
+        res[key].special_events = JSON.parse(res[key].special_events);
+        return '';
+      });
+      return res;
+    })
+  );
+
   const postUserPrefAction = ({
     id,
-    nights_per_week,
-    free_weekends,
-    night_shifts,
     special_events,
-    timetable_configurator,
+    weekend_days
   }) => {
     const preference_month = new Date().getMonth() + 1;
     return new Preferences()
       .insert()
       .set('user_id', id)
       .set('preference_month', preference_month)
-      .set('nights_per_week', nights_per_week)
-      .set('free_weekends', free_weekends)
-      .set('night_shifts', night_shifts)
       .set('special_events', JSON.stringify(special_events))
-      .set('timetable_configurator', JSON.stringify(timetable_configurator))
+      .set('weekend_days', weekend_days)
       .valueOf()
       .then(() => true)
       .catch(() => false);
@@ -44,6 +56,7 @@ module.exports = (() => {
 
   return {
     getUserPrefAction,
+    getAllUsersPrefAction,
     postUserPrefAction
   };
 })();

@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const timetableSchedule = require('node-schedule');
 
 const {
   authenticate, checkAuthenticated,
@@ -19,12 +20,29 @@ const {
   getUserPref
 } = require('./app/routes/preferences_routes');
 
+const {
+  getTimetable
+} = require('./app/routes/timetable_routes');
+
+// const { timetableAlgorithm } = require('./app/utils/timetableAlgorithm/main');
+
+// timetableSchedule.scheduleJob('5 * * * * *', () => {
+//   console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTT');
+//   timetableAlgorithm('5', '2019', {});
+// });
+
+// setInterval(() => {
+//   console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTT');
+//   timetableAlgorithm('5', '2019', {});
+// }, 10000);
+
 app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 
 app.get('/', (req, res) => {
+  // timetableAlgorithm('5', '2019');
   res.send('Hello! The API is at http://localhost/api');
 });
 
@@ -47,6 +65,10 @@ apiRoutes.post('/resetPassword', resetPassword);
 apiRoutes.get('/userPreferences', getUserPref);
 apiRoutes.post('/userPreferences', postUserPref);
 // preferences
+
+// timetable
+apiRoutes.get('/getTimetable/:month/:year', getTimetable);
+// timetable
 
 
 app.listen(PORT, () => {
