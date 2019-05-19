@@ -8,5 +8,6 @@ module.exports = {
         "global-require": 0,
         "func-names": 0,
         "consistent-return": 0,
+        "no-continue": 0,
     }
 };

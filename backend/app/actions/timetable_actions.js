@@ -14,11 +14,11 @@ module.exports = (() => {
     .valueOf()
     .then((res) => {
       const _res = {
-        currentTTDate: { month: res[0].month, year: res[0].year },
-        monthNorm: res[0].month_norm,
+        currentTTDate: { month: res[res.length - 1].month, year: res[res.length - 1].year },
+        monthNorm: res[res.length - 1].month_norm,
         otherTTDates: [],
-        tableHeader: JSON.parse(res[0].table_header),
-        tableData: JSON.parse(res[0].table_data),
+        tableHeader: JSON.parse(res[res.length - 1].table_header),
+        tableData: JSON.parse(res[res.length - 1].table_data),
       };
 
       return getUsersListAction().then((usersList) => {

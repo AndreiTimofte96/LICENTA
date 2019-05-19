@@ -6,8 +6,12 @@
     background-color: #D3EBFD;
   }
   .current-day{
-    background-color: #F9CFD5;
-    color: #E54A53 !important;
+    background-color: #F9CFD5 !important;
+    // color: #E54A53 !important;
+  }
+
+  .weekend-day{
+    background-color: rgb(236, 236, 236);
   }
   .picture{
     width: 30px;

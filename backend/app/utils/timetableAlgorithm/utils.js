@@ -1,5 +1,4 @@
 module.exports = (() => {
-
   const TTDATA = {
     L: { label: 'L', value: 0 },
     N: { label: 'N', value: 12 },
@@ -10,14 +9,20 @@ module.exports = (() => {
   };
 
   const TTRULES = {
-    freeDays: 14,
+    freeDays: 15,
+    maxNights: 5,
+    maxNightsPerDay: 2,
+    maxFreePerDay: 3,
+    maxFreeInRow: 3,
+    maxFreeDaysInWeek: 4,
+    maxNightsInWeek: 2,
   };
 
   const getRandomInt = (min, max) => (Math.floor(Math.random() * (max - min + 1) + min));
 
   const checkIfWeekendDay = (day, month, year) => {
     const _day = new Date(year, month - 1, day).getDay();
-    if (_day === 0 || day === 6) return true;
+    if (_day === 0 || _day === 6) return true;
     return false;
   };
   const checkIfFreeDayFromGovernment = (day, month, year) => {
@@ -91,12 +96,18 @@ module.exports = (() => {
     return daysArr;
   };
 
+  // const getByNight = (userStatus) => {
+  //   const copy = userStatus.slice(0);
+  //   return copy.sort((a, b) => a.nights < b.nights);
+  // };
+
   return {
     TTDATA,
     TTRULES,
     getMonthNorm,
     checkIfWeekendDay,
     getRandomInt,
-    getDayNames
+    getDayNames,
+    // sortUsersByNight,
   };
 })();
