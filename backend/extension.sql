@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: db
--- Timp de generare: mai 15, 2019 la 08:58 PM
+-- Timp de generare: mai 19, 2019 la 08:55 PM
 -- Versiune server: 5.6.43
 -- Versiune PHP: 7.2.14
 
@@ -32,20 +32,37 @@ CREATE TABLE `preferences` (
   `preference_id` int(255) NOT NULL,
   `user_id` int(255) NOT NULL,
   `preference_month` int(11) NOT NULL,
-  `nights_per_week` tinyint(11) NOT NULL DEFAULT '0',
-  `free_weekends` tinyint(1) NOT NULL DEFAULT '-1',
-  `night_shifts` tinyint(11) NOT NULL DEFAULT '-1',
+  `preference_year` int(11) NOT NULL,
   `special_events` varchar(500) DEFAULT NULL,
-  `timetable_configurator` varchar(500) DEFAULT NULL
+  `weekend_days` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `preferences`
 --
 
-INSERT INTO `preferences` (`preference_id`, `user_id`, `preference_month`, `nights_per_week`, `free_weekends`, `night_shifts`, `special_events`, `timetable_configurator`) VALUES
-(2, 17, 5, 2, -1, -1, '[1557948881057,1557943288157]', '{\"free_days\":12,\"nights\":5,\"8_hours\":4,\"12_hours\":13,\"norm\":168}'),
-(12, 18, 5, 3, 3, 2, '[1557943288157]', '{\"free_days\":5,\"nights\":3,\"8_hours\":4,\"12_hours\":13,\"norm\":170}');
+INSERT INTO `preferences` (`preference_id`, `user_id`, `preference_month`, `preference_year`, `special_events`, `weekend_days`) VALUES
+(13, 18, 5, 2019, '[1557943288157]', 0),
+(15, 19, 5, 2019, '[1557608400000, 1558126800000]', 0),
+(16, 20, 5, 2019, '[1558731600000]', 0),
+(17, 30, 5, 2019, NULL, 0),
+(18, 31, 5, 2019, NULL, 0),
+(19, 32, 5, 2019, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `timetable`
+--
+
+CREATE TABLE `timetable` (
+  `timetable_id` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `table_header` varchar(5000) NOT NULL,
+  `table_data` varchar(5000) NOT NULL,
+  `month_norm` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -68,7 +85,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `mail`, `username`, `password`, `password_changed`, `admin`) VALUES
 (17, 'andrei.timofte96@gmail.com', 'Timi', 'parola', 'false', 'false'),
-(18, 'olgics@yahoo.com', 'olgics', 'parola', 'false', 'false');
+(18, 'olga@yahoo.com', 'Olga', 'parola', 'false', 'false'),
+(19, 'paula@yahoo.com', 'Paula', 'parola', 'false', 'false'),
+(20, 'mihaela@yahoo.com', 'Mihaela', 'parola', 'false', 'false'),
+(30, 'dana@yahoo.com', 'Dana', 'parola', 'false', 'false'),
+(31, 'oana@yahoo.com', 'Oana', 'parola', 'false', 'false'),
+(32, 'raluca@yahoo.com', 'Raluca', 'parola', 'false', 'false');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -80,6 +102,12 @@ INSERT INTO `users` (`id`, `mail`, `username`, `password`, `password_changed`, `
 ALTER TABLE `preferences`
   ADD PRIMARY KEY (`preference_id`),
   ADD UNIQUE KEY `user_id` (`user_id`,`preference_month`);
+
+--
+-- Indexuri pentru tabele `timetable`
+--
+ALTER TABLE `timetable`
+  ADD PRIMARY KEY (`timetable_id`);
 
 --
 -- Indexuri pentru tabele `users`
@@ -96,13 +124,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pentru tabele `preferences`
 --
 ALTER TABLE `preferences`
-  MODIFY `preference_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `preference_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT pentru tabele `timetable`
+--
+ALTER TABLE `timetable`
+  MODIFY `timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
