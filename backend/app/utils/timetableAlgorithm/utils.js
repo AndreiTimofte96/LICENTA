@@ -207,7 +207,7 @@ module.exports = (() => {
         }
         return '';
       });
-      if (userStatus[userId] >= 1 && userHasGuardZero) return false;
+      if (userStatus[userId].weekNights >= 1 && userHasGuardZero) return false;
 
       return true;
     };

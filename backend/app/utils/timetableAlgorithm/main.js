@@ -44,7 +44,7 @@ module.exports = (() => {
       // set free weekend END
 
       const initalArr = [TTDATA.L.label, TTDATA.L.label, TTDATA.L.label,
-      TTDATA.N.label, TTDATA.T.label, TTDATA.T.label];
+        TTDATA.N.label, TTDATA.T.label, TTDATA.T.label];
       const shuffledArr = shuffleArray(initalArr);
       const permutedMatrix = permuteArray(shuffledArr);
       const permutedWeekMatrix = [
@@ -57,8 +57,11 @@ module.exports = (() => {
       ];
       for (let day = 1; day <= numberOfDays; day += 1) {
         if (checkIfWeekendDay(day, month, year)) {
+          const N = permutedWeekMatrix.length;
+          const x = Array.apply(null, { length: N }).map(Number.call, Number); //eslint-disable-line
+          const xx = shuffleArray(x);
           for (let index = 0; index < permutedWeekMatrix.length; index += 1) {
-            const arr = permutedWeekMatrix[index];
+            const arr = permutedWeekMatrix[xx[index]];
             if (respectsAllConstraints(resultMatrix, arr, day, month, year, userStatus) === true) {
               for (let userIndex = 0; userIndex < arr.length; userIndex += 1) {
                 resultMatrix[userIndex][day] = arr[userIndex];
@@ -134,6 +137,7 @@ module.exports = (() => {
               && checkInsertShift(resultMatrix, userIndex, day)) {
               resultMatrix[userIndex][day] = TTDATA.T.label;
               userStatus[userId].norm += TTDATA.T.value;
+              userStatus[userId].freeDays -= 1;
             }
           }
         }
