@@ -9,5 +9,6 @@ module.exports = {
         "func-names": 0,
         "consistent-return": 0,
         "no-continue": 0,
+        "no-loop-func": 0,
     }
 };

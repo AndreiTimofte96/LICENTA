@@ -72,7 +72,7 @@ export default class Timetable extends React.Component {
                 <tr>
                   <th />
                   {tableHeader.map((obj, index) => (
-                    <th className={this.getCellClassName(index, obj.dayNo)} scope="col" key={Math.random(1, 10000000)}>{obj.dayNo}</th>
+                    <th className={`text-center ${this.getCellClassName(index, obj.dayNo)}`} scope="col" key={Math.random(1, 10000000)}>{obj.dayNo}</th>
                   ))}
                 </tr>
                 <tr>
