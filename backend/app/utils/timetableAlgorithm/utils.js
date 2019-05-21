@@ -26,7 +26,7 @@ module.exports = (() => {
     if (_day === 0 || _day === 6) return true;
     return false;
   };
-  const checkIfFreeDayFromGovernment = (day, month, year) => {
+  const checkIfFreeDayFromGovernment = (day, month, year) => { //eslint-disable-line
     const _day = JSON.stringify(day);
     // const specialDays; // de luat in considerare Pastele, Rusaliile etc...
     const generalDays = [

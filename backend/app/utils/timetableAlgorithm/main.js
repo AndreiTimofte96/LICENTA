@@ -13,7 +13,7 @@ module.exports = (() => {
     let resultMatrix;
     let userStatus;
 
-    while (1) {
+    while (1) { //eslint-disable-line
       resultMatrix = [];
       userStatus = {};
       // initialize result matrix
@@ -152,7 +152,6 @@ module.exports = (() => {
               && resultMatrix[userIndex][day + 1] !== TTDATA.N.label
               && resultMatrix[userIndex][day - 1] !== TTDATA.GN.label
               && resultMatrix[userIndex][day + 1] !== TTDATA.GN.label) {
-
               // verific sa nu fie mai mult de 4 oameni pe tura in aceeasi seara
               let countDayFree = 0;
               for (let column = 0; column < resultMatrix.length; column += 1) {
@@ -176,7 +175,7 @@ module.exports = (() => {
       }
     }
 
-    console.log(userStatus);
+    console.log(userStatus); //eslint-disable-line
     const tableData = [];
     for (let userIndex = 0; userIndex < numberOfUsers; userIndex += 1) {
       const userId = usersPreferences[userIndex].user_id;
