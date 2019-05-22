@@ -16,7 +16,7 @@ const {
 } = require('./app/routes/authenticate_routes');
 
 const {
-  postUserPref,
+  putUserPref,
   getUserPref
 } = require('./app/routes/preferences_routes');
 
@@ -63,7 +63,7 @@ apiRoutes.post('/resetPassword', resetPassword);
 
 // preferences
 apiRoutes.get('/userPreferences', getUserPref);
-apiRoutes.post('/userPreferences', postUserPref);
+apiRoutes.put('/userPreferences', putUserPref);
 // preferences
 
 // timetable

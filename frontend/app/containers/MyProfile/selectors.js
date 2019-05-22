@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
-const selectValue = (state) => state.myprofile;
+const selectValue = (state) => state.myProfile;
+const selectUserValue = (state) => state.checkSession;
 
 const makeIsPending = () => createSelector(
   selectValue,
@@ -13,15 +14,20 @@ const makeIsSuccess = () => createSelector(
 );
 
 
-const makeMessage = () => createSelector(
+const makeUserPreferences = () => createSelector(
   selectValue,
-  (currentState) => currentState.message,
+  (currentState) => currentState.userPreferences,
 );
 
+const makeUserData = () => createSelector(
+  selectUserValue,
+  (currentState) => currentState.userData,
+);
 
 export {
   selectValue,
   makeIsPending,
   makeIsSuccess,
-  makeMessage,
+  makeUserPreferences,
+  makeUserData
 };

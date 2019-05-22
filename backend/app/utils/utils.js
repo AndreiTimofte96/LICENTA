@@ -3,7 +3,7 @@ module.exports = (() => {
     let message = '';
     let status = true;
     Object.keys(object).forEach((key) => {
-      if (object[key] === undefined || object[key] === null || object[key].length === 0) {
+      if (object[key] === undefined || object[key] === null) {
         message += `${key}, `;
         status = false;
       }
@@ -19,7 +19,13 @@ module.exports = (() => {
     resolve(response);
   });
 
+  const APP_CONSTS = {
+    setPrefFirstDay: 1,
+    setPrefLastDay: 25,
+  };
+
   return {
-    checkReqBodyFields
+    checkReqBodyFields,
+    APP_CONSTS
   };
 })();

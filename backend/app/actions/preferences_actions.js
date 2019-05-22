@@ -1,4 +1,5 @@
 module.exports = (() => {
+  const { APP_CONSTS } = require('../utils/utils');
   const Preferences = require('../models/preferences_model');
 
   const getUserPrefAction = ({
@@ -10,13 +11,19 @@ module.exports = (() => {
     })
     .valueOf()
     .then((res) => {
+      const canModifyPreferences = new Date().getDate() < APP_CONSTS.setPrefLastDay;
       const userPref = {
-        ...res[0],
-        special_events: JSON.parse(res[0].special_events),
+        specialEvents: JSON.parse(res[0].special_events),
+        firstDayInMonth: APP_CONSTS.setPrefFirstDay,
+        lastDayInMonth: APP_CONSTS.setPrefLastDay,
+        month: res[0].preference_month,
+        year: res[0].preference_year,
+        weekendDays: JSON.parse(res[0].weekend_days),
+        canModifyPreferences,
       };
       return userPref;
     })
-  );
+    );
 
   const getAllUsersPrefAction = ({
     month,
@@ -33,22 +40,24 @@ module.exports = (() => {
         res[key].special_events = JSON.parse(res[key].special_events);
         return '';
       });
-      return res;
     })
   );
 
-  const postUserPrefAction = ({
+  const putUserPrefAction = ({
     id,
-    special_events,
-    weekend_days
+    specialEvents,
+    weekendDays,
+    month,
+    year
   }) => {
-    const preference_month = new Date().getMonth() + 1;
+    // setting for next month
     return new Preferences()
-      .insert()
-      .set('user_id', id)
-      .set('preference_month', preference_month)
-      .set('special_events', JSON.stringify(special_events))
-      .set('weekend_days', weekend_days)
+      .update()
+      .set('special_events', JSON.stringify(specialEvents))
+      .set('weekend_days', JSON.stringify(weekendDays))
+      .where({
+        id, month, year
+      })
       .valueOf()
       .then(() => true)
       .catch(() => false);
@@ -57,6 +66,6 @@ module.exports = (() => {
   return {
     getUserPrefAction,
     getAllUsersPrefAction,
-    postUserPrefAction
+    putUserPrefAction
   };
 })();

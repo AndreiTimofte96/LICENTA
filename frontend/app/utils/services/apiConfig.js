@@ -3,6 +3,7 @@ const apiRoutes = {
   LOGIN: '/authenticate',
   USER_ME: '/api/userMe',
   GET_TIMETABLE: '/api/getTimetable',
+  GET_USER_PREFERENCES: '/api/userPreferences',
 };
 
 const apiHeaders = (token) => {

@@ -1,5 +1,5 @@
 module.exports = (() => {
-  const { getUserPrefAction, postUserPrefAction } = require('../actions/preferences_actions');
+  const { getUserPrefAction, putUserPrefAction } = require('../actions/preferences_actions');
   const { checkReqBodyFields } = require('../utils/utils');
 
 
@@ -13,27 +13,33 @@ module.exports = (() => {
       });
   };
 
-  const postUserPref = (req, res) => {
+  const putUserPref = (req, res) => {
     const { id } = req.decoded.user;
     const {
-      special_events,
-      weekend_days
+      specialEvents,
+      weekendDays,
+      month,
+      year,
     } = req.body;
 
     checkReqBodyFields({
-      special_events,
-      weekend_days
+      specialEvents,
+      weekendDays,
+      month,
+      year,
     }).then((response) => {
       if (response.status === false) {
         return res.status(400).send(response.res);
       }
-      postUserPrefAction({
+      putUserPrefAction({
         id,
-        special_events,
-        weekend_days
+        specialEvents,
+        weekendDays,
+        month,
+        year,
       }).then((response1) => {
         if (response1 === true) {
-          return res.json({ success: true, message: 'Preferinte adaugate cu succes' });
+          return res.json({ success: true, message: 'Preferinte updatate cu succes' });
         }
         return res.send(401, 'Eroare! Preferinta deja adaugata pentru aceasta luna!');
       });
@@ -44,6 +50,6 @@ module.exports = (() => {
   };
   return {
     getUserPref,
-    postUserPref
+    putUserPref
   };
 })();

@@ -12,11 +12,11 @@ module.exports = (() => {
     where({ id, year, month }) {
       let whereClause = squel.expr();
 
-      if (id) {
-        whereClause = whereClause.and('user_id = ?', id);
+      if (id && month && year) {
+        whereClause = whereClause.and('user_id = ?', id).and('preference_month = ?', month).and('preference_year = ?', year);
       }
 
-      if (year && month) {
+      if (!id && year && month) {
         whereClause = whereClause.and('preference_month = ?', month).and('preference_year = ?', year);
       }
 

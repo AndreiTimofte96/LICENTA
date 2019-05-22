@@ -6,11 +6,11 @@ export function getTimetableData(month, year) {
   return (dispatch) => {
     dispatch(getTimetablePending(true));
     timetableService_get(month, year).then((response) => {
-      dispatch(getTimetableSuccess(response.data.timetable));
+      dispatch(getTimetableSuccess(response.data));
       dispatch(getTimetablePending(false));
     }).catch((error) => {
-      console.log('!!!!!!', error.response.data); //eslint-disable-line
       dispatch(getTimetableError(error.response.data));
+      dispatch(getTimetablePending(false));
     });
   };
 }
@@ -20,10 +20,10 @@ const getTimetablePending = (status) => ({
   isPending: status,
 });
 
-const getTimetableSuccess = (payload) => ({
+const getTimetableSuccess = (data) => ({
   type: GET_TIMETABLE_SUCCESS,
   isSuccess: true,
-  payload,
+  payload: data.timetable,
 });
 
 const getTimetableError = (error) => ({

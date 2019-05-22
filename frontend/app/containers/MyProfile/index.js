@@ -2,21 +2,25 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
-import { makeIsPending, makeIsSuccess, makeMessage } from './selectors';
+import { getUserPreferences, putUserPreferences } from './actions';
+import { makeIsPending, makeIsSuccess, makeUserPreferences, makeUserData } from './selectors';
 import reducer from './reducer';
 import MyProfile from './MyProfile';
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = (dispatch) => ({
+  getUserPreferences: () => getUserPreferences()(dispatch),
+  putPreferences: (object) => putUserPreferences(object)(dispatch),
 });
 
 const mapStateToProps = createStructuredSelector({
   isPending: makeIsPending(),
   isSuccess: makeIsSuccess(),
-  message: makeMessage(),
+  userPreferences: makeUserPreferences(),
+  userData: makeUserData(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'myprofile', reducer });
+const withReducer = injectReducer({ key: 'myProfile', reducer });
 
 export default compose(withReducer, withConnect)(MyProfile);
