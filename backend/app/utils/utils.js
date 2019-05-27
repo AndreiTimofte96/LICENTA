@@ -21,7 +21,7 @@ module.exports = (() => {
 
   const APP_CONSTS = {
     setPrefFirstDay: 1,
-    setPrefLastDay: 25,
+    setPrefLastDay: 15,
   };
 
   return {

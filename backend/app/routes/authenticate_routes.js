@@ -69,15 +69,14 @@ module.exports = (() => {
 
   const resetPassword = (req, res) => {
     const { mail } = req.decoded.user;
-    const { password, new_password } = req.body;
-
-    checkReqBodyFields({ password, new_password }).then((response) => {
+    const { password, newPassword } = req.body;
+    checkReqBodyFields({ password, newPassword }).then((response) => {
       if (response.status === false) {
         return res.status(400).send(response.res);
       }
     });
 
-    changeUserPassword({ mail, password, new_password })
+    changeUserPassword({ mail, password, newPassword })
       .then((response) => {
         if (response === true) {
           return res.json({ success: true, message: 'Parola schimbata cu succes!' });

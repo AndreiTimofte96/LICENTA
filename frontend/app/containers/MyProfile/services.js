@@ -10,7 +10,6 @@ const userPreferencesService_get = () => {
   );
 };
 
-
 const userPreferencesService_put = (body) => {
   const token = localStorage.getItem('ntm-token');
   return axios.put(
@@ -20,5 +19,19 @@ const userPreferencesService_put = (body) => {
   );
 };
 
-export { userPreferencesService_get, userPreferencesService_put };
+
+const newPasswordService_put = (body) => {
+  const token = localStorage.getItem('ntm-token');
+  return axios.put(
+    `${apiRoutes.API_URL}${apiRoutes.RESET_PASSWORD}`,
+    body,
+    { headers: apiHeaders(token) },
+  );
+};
+
+export {
+  userPreferencesService_get,
+  userPreferencesService_put,
+  newPasswordService_put,
+};
 

@@ -4,6 +4,7 @@ const apiRoutes = {
   USER_ME: '/api/userMe',
   GET_TIMETABLE: '/api/getTimetable',
   GET_USER_PREFERENCES: '/api/userPreferences',
+  RESET_PASSWORD: '/api/resetPassword',
 };
 
 const apiHeaders = (token) => {

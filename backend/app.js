@@ -59,7 +59,7 @@ apiRoutes.get('/', (req, res) => {
 });
 
 apiRoutes.get('/userMe', userMe);
-apiRoutes.post('/resetPassword', resetPassword);
+apiRoutes.put('/resetPassword', resetPassword);
 
 // preferences
 apiRoutes.get('/userPreferences', getUserPref);

@@ -17,7 +17,15 @@ module.exports = (() => {
           id
         })
         .valueOf()
-        .then((res) => res[0]);
+        .then((res) => {
+          let _res = res[0];
+          _res = {
+            ..._res,
+            passwordChanged: JSON.parse(_res.password_changed)
+          };
+          delete _res.password_changed;
+          return _res;
+        });
     }
 
     return new User()
@@ -32,8 +40,8 @@ module.exports = (() => {
       });
   };
 
-  const changeUserPassword = ({ mail, password, new_password }) => {
-    if (mail && password && new_password) {
+  const changeUserPassword = ({ mail, password, newPassword }) => {
+    if (mail && password && newPassword) {
       return new User()
         .field('*')
         .where({
@@ -43,7 +51,7 @@ module.exports = (() => {
           if (res.length === 1) {
             return new User()
               .update()
-              .set('password', new_password)
+              .set('password', newPassword)
               .set('password_changed', 'true')
               .where({ mail, password })
               .valueOf()

@@ -2,8 +2,18 @@ import {
   GET_USER_PREFERENCES_PENDING,
   GET_USER_PREFERENCES_SUCCESS,
   GET_USER_PREFERENCES_ERROR,
+  PUT_NEW_PASSWORD_ERROR,
+  PUT_NEW_PASSWORD_PENDING,
+  PUT_NEW_PASSWORD_SUCCESS,
+  PUT_USER_PREFERENCES_ERROR,
+  PUT_USER_PREFERENCES_PENDING,
+  PUT_USER_PREFERENCES_SUCCESS,
 } from './constants';
-import { userPreferencesService_get, userPreferencesService_put } from './services';
+import {
+  userPreferencesService_get,
+  userPreferencesService_put,
+  newPasswordService_put,
+} from './services';
 
 export function getUserPreferences() {
   return (dispatch) => {
@@ -50,18 +60,49 @@ export function putUserPreferences(object) {
 }
 
 const putPreferencesPending = (status) => ({
-  type: GET_USER_PREFERENCES_PENDING,
+  type: PUT_USER_PREFERENCES_PENDING,
   isPending: status,
 });
 
 const putPreferencesSuccess = (data) => ({
-  type: GET_USER_PREFERENCES_SUCCESS,
+  type: PUT_USER_PREFERENCES_SUCCESS,
   isSuccess: true,
-  payload: data.userPreferences,
+  payload: data.message,
 });
 
 const putPreferencesError = (error) => ({
-  type: GET_USER_PREFERENCES_ERROR,
+  type: PUT_USER_PREFERENCES_ERROR,
   isError: true,
-  errorMessage: error.message,
+  payload: error,
+});
+
+
+export function putNewPassword(password, newPassword) {
+  return (dispatch) => {
+    dispatch(putNewPasswordPending(true));
+    newPasswordService_put({ password, newPassword }).then((response) => {
+      dispatch(putNewPasswordSuccess(response.data));
+      dispatch(putNewPasswordPending(false));
+    }).catch((error) => {
+      dispatch(putNewPasswordError(error.response.data));
+      dispatch(putNewPasswordPending(false));
+    });
+  };
+}
+
+const putNewPasswordPending = (status) => ({
+  type: PUT_NEW_PASSWORD_PENDING,
+  isPending: status,
+});
+
+const putNewPasswordSuccess = (data) => ({
+  type: PUT_NEW_PASSWORD_SUCCESS,
+  isSuccess: true,
+  payload: data.message,
+});
+
+const putNewPasswordError = (error) => ({
+  type: PUT_NEW_PASSWORD_ERROR,
+  isError: true,
+  payload: error,
 });

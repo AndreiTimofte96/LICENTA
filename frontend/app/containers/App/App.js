@@ -1,6 +1,6 @@
 import React from 'react';
-import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
-
+import { Switch, Route, HashRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Login from '../Login/Loadable';
 import Blog from '../Blog/Blog';
 import NotFoundPage from '../NotFoundPage/Loadable';
@@ -10,6 +10,9 @@ import MyTimetable from '../MyTimetable/Loadable';
 import MyProfile from '../MyProfile/Loadable';
 import '../../styles/global-styles.scss';
 import './style.scss';
+
+// Call it once in your app. At the root of your app is the best place
+toast.configure();
 
 const App = () => (
   <div className="app-wrapper">

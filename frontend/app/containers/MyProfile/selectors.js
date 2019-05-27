@@ -13,6 +13,40 @@ const makeIsSuccess = () => createSelector(
   (currentState) => currentState.isSuccess,
 );
 
+const makeIsError = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isError,
+);
+
+const makeIsPreferenceSetPending = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isPreferenceSetPending,
+);
+
+const makeIsPreferenceSetSuccess = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isPreferenceSetSuccess,
+);
+
+const makeIsPreferenceSetError = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isPreferenceSetError,
+);
+
+const makeIsPasswordSetPending = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isPasswordSetPending,
+);
+
+const makeIsPasswordSetSuccess = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isPasswordSetSuccess,
+);
+
+const makeIsPasswordSetError = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isPasswordSetError,
+);
 
 const makeUserPreferences = () => createSelector(
   selectValue,
@@ -24,10 +58,29 @@ const makeUserData = () => createSelector(
   (currentState) => currentState.userData,
 );
 
+const makeChangePasswordMessage = () => createSelector(
+  selectValue,
+  (currentState) => currentState.changePasswordMessage,
+);
+
+const makePreferencesSetMessage = () => createSelector(
+  selectValue,
+  (currentState) => currentState.preferencesSetMessage,
+);
+
 export {
   selectValue,
   makeIsPending,
   makeIsSuccess,
+  makeIsError,
   makeUserPreferences,
-  makeUserData
+  makeUserData,
+  makeChangePasswordMessage,
+  makePreferencesSetMessage,
+  makeIsPreferenceSetPending,
+  makeIsPreferenceSetError,
+  makeIsPreferenceSetSuccess,
+  makeIsPasswordSetPending,
+  makeIsPasswordSetError,
+  makeIsPasswordSetSuccess,
 };
