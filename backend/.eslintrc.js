@@ -10,5 +10,6 @@ module.exports = {
         "consistent-return": 0,
         "no-continue": 0,
         "no-loop-func": 0,
+        "max-len": 0,
     }
 };

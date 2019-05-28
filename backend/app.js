@@ -24,6 +24,10 @@ const {
   getTimetable
 } = require('./app/routes/timetable_routes');
 
+const {
+  getHomepage
+} = require('./app/routes/homepage_routes');
+
 const { timetableAlgorithm } = require('./app/utils/timetableAlgorithm/main');
 
 // timetableSchedule.scheduleJob('5 * * * * *', () => {
@@ -60,6 +64,11 @@ apiRoutes.get('/', (req, res) => {
 
 apiRoutes.get('/userMe', userMe);
 apiRoutes.put('/resetPassword', resetPassword);
+
+// homepage
+apiRoutes.get('/homepage', getHomepage);
+// homepage
+
 
 // preferences
 apiRoutes.get('/userPreferences', getUserPref);

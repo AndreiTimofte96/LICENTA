@@ -1,6 +1,7 @@
 /* eslint consistent-return:0 */
 
 const express = require('express');
+const open = require('open');
 const logger = require('./util//logger');
 
 const argv = require('./util/argv');
@@ -29,5 +30,6 @@ app.listen(port, host, (err) => {
   if (err) {
     return logger.error(err.message);
   }
+  open(`http://${prettyHost}:${port}`);
   logger.appStarted(port, prettyHost);
 });

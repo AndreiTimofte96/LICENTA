@@ -21,7 +21,8 @@ module.exports = (() => {
           let _res = res[0];
           _res = {
             ..._res,
-            passwordChanged: JSON.parse(_res.password_changed)
+            passwordChanged: JSON.parse(_res.password_changed),
+            admin: JSON.parse(_res.admin),
           };
           delete _res.password_changed;
           return _res;
