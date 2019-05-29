@@ -4,15 +4,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ro from 'date-fns/locale/ro'; // the locale you want
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// minified version is also included
-// import 'react-toastify/dist/ReactToastify.min.css'
+import FileUpload from '../../components/FileUpload';
 import Header from '../Header/Loadable';
 import LoadingIndicator from '../../components/LoadingIndicator';
 // import Modal from '../../components/Modal';
 import { getTextMonth, getDateFromMiliseconds } from '../../utils/dates/dates';
-
 import './style.scss';
 
+const MAX_FILE_SIZE = 1024 * 1024 * 20;
 export default class MyProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +31,7 @@ export default class MyProfile extends React.Component {
       oldPassword: '',
       newPassword: '',
       passwordChanged: this.props.userData.passwordChanged,
+      userPicture: {},
     };
   }
 
@@ -44,7 +44,9 @@ export default class MyProfile extends React.Component {
     if (prevProps.isPending === true && this.props.isPending === false) {
       _state.userPreferences = this.props.userPreferences;
       _state.userPreferences.specialEvents =
-      _state.userPreferences.specialEvents.map(date => new Date(date));
+        _state.userPreferences.specialEvents.map(date => new Date(date));
+      _state.userPicture = { url: this.props.userData.pictureUrl };
+
       this.setState(_state);
     }
 
@@ -84,6 +86,15 @@ export default class MyProfile extends React.Component {
         position: toast.POSITION.BOTTOM_RIGHT,
         type: 'error',
       });
+    }
+    if (prevProps.isUploadFileSuccess === false && this.props.isUploadFileSuccess === true
+      && this.props.uploadFileMessage.length) {
+      toast(this.props.uploadFileMessage, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        type: 'success',
+      });
+      _state.userPicture = this.props.userPicture;
+      this.setState(_state);
     }
   }
 
@@ -140,6 +151,22 @@ export default class MyProfile extends React.Component {
       specialEvents: userPreferences.specialEvents.map(date => new Date(date).getTime()),
     };
     this.props.putPreferences(prefObject);
+  }
+
+  handleDropzoneChange = (filesAccepted, filesRejected) => {
+    const _state = this.state;
+    if (filesRejected.length > 0) {
+      if (filesRejected[0].size > MAX_FILE_SIZE) {
+        _state.fileUploadError = {
+          error: true,
+          // message: `${t('file_too_large')} ${MAX_FILE_SIZE / 1000000} MB`
+        };
+        this.setState(_state);
+      }
+    } else {
+      const file = filesAccepted[0];
+      this.props.uploadUserPicture(file);
+    }
   }
 
   renderPersonalInfoCard = () => {
@@ -234,13 +261,20 @@ export default class MyProfile extends React.Component {
       </div>
     );
   }
+
   renderProfilePictureCard = () => {
+    const { userPicture } = this.state;
     return (
       <div className="card">
         <h5 className="card-header"> Poza de profil </h5>
         <div className="card-body">
-          <div className="img" />
-          <button type="button" className="mt-4 btn btn-primary">Schimba poza</button>
+          <FileUpload
+            error={false}
+            file={userPicture}
+            accept={['image/jpeg', 'image/jpg', 'image/png']}
+            onDrop={this.handleDropzoneChange}
+            maxFileSize={MAX_FILE_SIZE}
+          />
         </div>
       </div>
     );
@@ -331,6 +365,8 @@ export default class MyProfile extends React.Component {
   render() {
     const { userPreferences } = this.state;
     const { isPending } = this.props;
+
+    console.log(this.props);
     if (isPending) {
       return (
         <LoadingIndicator />
@@ -341,9 +377,6 @@ export default class MyProfile extends React.Component {
       <div>
         <Header />
         <div className="profile-container px-5 py-2">
-          {/* <Modal
-            showModal
-          /> */}
           <h2 className="">Profilul meu</h2>
           {this.renderPreferences(userPreferences)}
         </div>

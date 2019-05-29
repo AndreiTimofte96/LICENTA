@@ -19,6 +19,9 @@ module.exports = (() => {
       if (!id && year && month) {
         whereClause = whereClause.and('preference_month = ?', month).and('preference_year = ?', year);
       }
+      if (id && !year && !month) {
+        whereClause = whereClause.and('user_id = ?', id);
+      }
 
       this.query = this.query.where(whereClause);
       return this;

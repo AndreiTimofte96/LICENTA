@@ -13,9 +13,9 @@ const makeIsSuccess = () => createSelector(
 );
 
 
-const makeMessage = () => createSelector(
+const makeHomepage = () => createSelector(
   selectValue,
-  (currentState) => currentState.message,
+  (currentState) => currentState.homepage,
 );
 
 
@@ -23,5 +23,5 @@ export {
   selectValue,
   makeIsPending,
   makeIsSuccess,
-  makeMessage,
+  makeHomepage,
 };

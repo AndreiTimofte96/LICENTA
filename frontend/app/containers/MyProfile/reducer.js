@@ -8,6 +8,9 @@ import {
   PUT_USER_PREFERENCES_ERROR,
   PUT_USER_PREFERENCES_PENDING,
   PUT_USER_PREFERENCES_SUCCESS,
+  UPLOAD_USER_PICTURE_ERROR,
+  UPLOAD_USER_PICTURE_PENDING,
+  UPLOAD_USER_PICTURE_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -27,6 +30,12 @@ const initialState = {
   isPreferenceSetSuccess: false,
   isPreferenceSetError: false,
   preferencesSetMessage: '',
+
+  userPicture: {},
+  isUploadFilePending: false,
+  isUploadFileSuccess: false,
+  isUploadFileError: false,
+  uploadFileMessage: '',
 };
 
 function profileReducer(state = initialState, action) {
@@ -89,6 +98,29 @@ function profileReducer(state = initialState, action) {
         isPasswordSetError: action.isError,
         isPasswordSetSuccess: false,
         changePasswordMessage: action.payload,
+      };
+
+    case UPLOAD_USER_PICTURE_PENDING:
+      return {
+        ...state,
+        isUploadFilePending: action.isPending,
+        isUploadFileError: false,
+        isUploadFileSuccess: false,
+      };
+    case UPLOAD_USER_PICTURE_SUCCESS:
+      return {
+        ...state,
+        isUploadFileSuccess: action.isSuccess,
+        isUploadFileError: false,
+        uploadFileMessage: action.message,
+        userPicture: action.file,
+      };
+    case UPLOAD_USER_PICTURE_ERROR:
+      return {
+        ...state,
+        isUploadFileError: action.isError,
+        isUploadFileSuccess: false,
+        uploadFileMessage: action.payload,
       };
 
 

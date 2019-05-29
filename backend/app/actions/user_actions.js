@@ -4,7 +4,7 @@ module.exports = (() => {
   const getUser = ({
     id,
     password,
-    mail
+    mail,
   }) => {
     if (id) {
       return new User()
@@ -12,6 +12,7 @@ module.exports = (() => {
         .field('mail')
         .field('username')
         .field('password_changed')
+        .field('picture_url')
         .field('admin')
         .where({
           id
@@ -23,8 +24,10 @@ module.exports = (() => {
             ..._res,
             passwordChanged: JSON.parse(_res.password_changed),
             admin: JSON.parse(_res.admin),
+            pictureUrl: _res.picture_url,
           };
           delete _res.password_changed;
+          delete _res.picture_url;
           return _res;
         });
     }
@@ -69,10 +72,17 @@ module.exports = (() => {
     .valueOf()
     .then((res) => res);
 
+  const postUserPicture = ({ id, pictureUrl }) => new User()
+    .update()
+    .set('picture_url', pictureUrl)
+    .where({ id })
+    .valueOf()
+    .then((res) => res);
+
   return {
     getUser,
     changeUserPassword,
-    getUsersListAction
-
+    getUsersListAction,
+    postUserPicture
   };
 })();

@@ -48,6 +48,22 @@ const makeIsPasswordSetError = () => createSelector(
   (currentState) => currentState.isPasswordSetError,
 );
 
+const makeIsUploadFilePending = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isUploadFilePending,
+);
+
+const makeIsUploadFileSuccess = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isUploadFileSuccess,
+);
+
+const makeIsUploadFileError = () => createSelector(
+  selectValue,
+  (currentState) => currentState.isUploadFileError,
+);
+
+
 const makeUserPreferences = () => createSelector(
   selectValue,
   (currentState) => currentState.userPreferences,
@@ -68,6 +84,17 @@ const makePreferencesSetMessage = () => createSelector(
   (currentState) => currentState.preferencesSetMessage,
 );
 
+const makeUploadFileMessage = () => createSelector(
+  selectValue,
+  (currentState) => currentState.uploadFileMessage,
+);
+
+const makeUserPicture = () => createSelector(
+  selectValue,
+  (currentState) => currentState.userPicture,
+);
+
+
 export {
   selectValue,
   makeIsPending,
@@ -83,4 +110,9 @@ export {
   makeIsPasswordSetPending,
   makeIsPasswordSetError,
   makeIsPasswordSetSuccess,
+  makeIsUploadFilePending,
+  makeIsUploadFileSuccess,
+  makeIsUploadFileError,
+  makeUploadFileMessage,
+  makeUserPicture,
 };

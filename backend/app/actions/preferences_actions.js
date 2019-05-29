@@ -23,7 +23,7 @@ module.exports = (() => {
       };
       return userPref;
     })
-    );
+  );
 
   const getAllUsersPrefAction = ({
     month,

@@ -21,7 +21,7 @@ module.exports = (() => {
       startingShiftDate = new Date(currYear, currMonth - 1, day).getTime();
       dateFound = true;
     } else if (new Date() < new Date(endDate)) { // suntem de tura;
-      startingShiftIn = 'Tura in desfasurare';
+      startingShiftIn = 'tura in desfasurare';
       startingShiftDate = new Date(currYear, currMonth - 1, day).getTime();
       dateFound = true;
     }

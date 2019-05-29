@@ -21,7 +21,7 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { username } = this.props;
+    const { username, pictureUrl } = this.props;
     return (
       <div className="header-container">
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -68,7 +68,11 @@ export default class Header extends React.Component {
 
             </ul>
             <div className="mx-2 username d-inline-flex">
-              <div className="picture" />
+              {pictureUrl ?
+                <img className="picture" src={pictureUrl} alt="Profile img" />
+                :
+                <div className="picture" />
+              }
               <NavLink to="/my-profile" className="p-2">
                 <b>{username}</b>
               </NavLink>

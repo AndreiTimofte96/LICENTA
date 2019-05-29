@@ -5,6 +5,8 @@ const apiRoutes = {
   GET_TIMETABLE: '/api/getTimetable',
   GET_USER_PREFERENCES: '/api/userPreferences',
   RESET_PASSWORD: '/api/resetPassword',
+  GET_HOMEPAGE: '/api/homepage',
+  UPLOAD_FILE: '/api/uploadPicture',
 };
 
 const apiHeaders = (token) => {

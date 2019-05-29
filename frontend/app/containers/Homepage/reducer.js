@@ -1,9 +1,11 @@
-import { GET_HOMEPAGE_PENDING, GET_HOMEPAGE_SUCCESS } from './constants';
+import { GET_HOMEPAGE_PENDING, GET_HOMEPAGE_SUCCESS, GET_HOMEPAGE_ERROR } from './constants';
 // The initial state of the App
 const initialState = {
   message: null,
+  homepage: {},
   isPending: false,
   isSuccess: false,
+  errorMessage: '',
 };
 
 function homepageReducer(state = initialState, action) {
@@ -17,7 +19,13 @@ function homepageReducer(state = initialState, action) {
       return {
         ...state,
         isSuccess: action.isSuccess,
-        message: action.message,
+        homepage: action.payload,
+      };
+    case GET_HOMEPAGE_ERROR:
+      return {
+        ...state,
+        isError: action.isError,
+        errorMessage: action.errorMessage,
       };
     default:
       return state;

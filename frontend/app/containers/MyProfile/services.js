@@ -28,10 +28,26 @@ const newPasswordService_put = (body) => {
     { headers: apiHeaders(token) },
   );
 };
+const uploadUserPicture_post = (file) => {
+  const formData = new FormData();
+  formData.set('profileImage', file);
+  const token = localStorage.getItem('ntm-token');
+  return axios.post(
+    `${apiRoutes.API_URL}${apiRoutes.UPLOAD_FILE}`,
+    formData,
+    {
+      headers: {
+        ...apiHeaders(token),
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+};
 
 export {
   userPreferencesService_get,
   userPreferencesService_put,
   newPasswordService_put,
+  uploadUserPicture_post,
 };
 

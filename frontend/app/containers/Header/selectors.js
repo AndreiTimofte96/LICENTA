@@ -7,8 +7,14 @@ const makeUsername = () => createSelector(
   (currentState) => currentState.userData.username,
 );
 
+const makePictureUrl = () => createSelector(
+  selectValue,
+  (currentState) => currentState.userData.pictureUrl,
+);
+
 
 export {
   selectValue,
   makeUsername,
+  makePictureUrl,
 };

@@ -1,7 +1,6 @@
 module.exports = (() => {
   const { getTimetableAction } = require('../actions/timetable_actions');
 
-
   const getTimetable = (req, res) => {
     const { month, year } = req.params;
     getTimetableAction({ month, year })

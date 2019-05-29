@@ -4,11 +4,13 @@ const chalk = require('chalk'); // pt colorare mesaje
 const debug = require('debug')('app');
 const bodyParser = require('body-parser');
 const morgan = require('morgan'); // afiseaza ce req sunt facute
+// const timetableSchedule = require('node-schedule');
+
 const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const timetableSchedule = require('node-schedule');
+
 
 const {
   authenticate, checkAuthenticated,
@@ -28,6 +30,11 @@ const {
   getHomepage
 } = require('./app/routes/homepage_routes');
 
+const {
+  uploadFile,
+  uploadMiddleware
+} = require('./app/routes/uploadFiles_routes');
+
 const { timetableAlgorithm } = require('./app/utils/timetableAlgorithm/main');
 
 // timetableSchedule.scheduleJob('5 * * * * *', () => {
@@ -44,6 +51,7 @@ app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use('/uploads', express.static('uploads'));
 
 app.get('/', (req, res) => {
   timetableAlgorithm('5', '2019');
@@ -69,10 +77,11 @@ apiRoutes.put('/resetPassword', resetPassword);
 apiRoutes.get('/homepage', getHomepage);
 // homepage
 
-
 // preferences
 apiRoutes.get('/userPreferences', getUserPref);
 apiRoutes.put('/userPreferences', putUserPref);
+
+apiRoutes.post('/uploadPicture', uploadMiddleware, uploadFile);
 // preferences
 
 // timetable
