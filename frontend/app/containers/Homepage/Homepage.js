@@ -85,7 +85,7 @@ export default class HomePage extends React.Component {
             </div>
             <div className="col-4">
               <div>Programul tau urmator:</div>
-              <div className="mt-2 w-50">
+              <div className="mt-2">
                 <table className="table table-bordered cursor-pointer text-center" onClick={this.redirectToTimetable}>
                   <thead>
                     <tr>

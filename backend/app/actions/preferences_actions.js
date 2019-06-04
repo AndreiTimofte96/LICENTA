@@ -40,6 +40,7 @@ module.exports = (() => {
         res[key].special_events = JSON.parse(res[key].special_events);
         return '';
       });
+      return res;
     })
   );
 

@@ -54,7 +54,7 @@ app.use(morgan('tiny'));
 app.use('/uploads', express.static('uploads'));
 
 app.get('/', (req, res) => {
-  timetableAlgorithm('5', '2019');
+  timetableAlgorithm('6', '2019');
   res.send('Hello! The API is at http://localhost/api');
 });
 
